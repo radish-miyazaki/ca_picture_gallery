@@ -31,6 +31,10 @@
                  [cheshire "5.12.0"]
                  [camel-snake-kebab "0.4.3"]]
   :main ^:skip-aot picture-gallery.core
+  :plugins
+  [[lein-ancient "1.0.0-RC3"]
+   [lein-cloverage "1.2.4"]
+   [lein-environ "1.2.0"]]
   :target-path "target/%s"
   :profiles {:dev [:project/dev :profiles/dev]
              :repl {:prep-tasks ^:replace ["javac" "compile"]
