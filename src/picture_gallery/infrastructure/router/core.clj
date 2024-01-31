@@ -2,6 +2,7 @@
   (:require
    [integrant.core :as ig]
    [muuntaja.core :as m]
+   [picture-gallery.infrastructure.router.ping :refer [ping-router]]
    [reitit.coercion.spec]
    [reitit.dev.pretty :as pretty]
    [reitit.ring :as ring]
@@ -26,8 +27,8 @@
                                                 :name "Authorization"}}
                                               :basePath "/"}}
                              :handler (swagger/create-swagger-handler)}}]
-     ;; TODO: "/api" 以下に機能を定義していく
-     ["/api"]]
+     ["/api"
+      (ping-router)]]
     {:exception pretty/exception
      :data {:coercion reitit.coercion.spec/coercion
             :muuntaja m/instance
@@ -40,8 +41,9 @@
                          coercion/coerce-response-middleware
                          coercion/coerce-request-middleware
                          multipart/multipart-middleware]}})
-   (swagger-ui/create-swagger-ui-handler {:path "/api"})
-   (ring/create-default-handler)))
+   (ring/routes
+    (swagger-ui/create-swagger-ui-handler {:path "/api"})
+    (ring/create-default-handler))))
 
 (defmethod ig/init-key ::router
   [_ {:keys [env]}]
