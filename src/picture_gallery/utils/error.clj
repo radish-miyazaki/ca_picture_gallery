@@ -1,6 +1,6 @@
-(ns picture-gallery.utils.errors)
+(ns picture-gallery.utils.error)
 
-(defn- bind-error [f [val err]]
+(defn bind-error [f [val err]]
   (if (nil? err)
     (f val)
     [nil err]))
