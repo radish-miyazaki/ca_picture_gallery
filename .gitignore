@@ -15,3 +15,4 @@ pom.xml.asc
 .clj-kondo/
 .lsp/
 firebase_secrets.json
+.DS_Store
